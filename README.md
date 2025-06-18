@@ -14,7 +14,7 @@
 
 ### 👤 `AboutMe.md` - 关于项目发起人
 
-*   **姓名 (Name):** 郎庭波 (Lang Tingbo)
+*   **姓名 (Name):** Bob (Lang Tingbo)
 *   **身高 (Height):** 165cm
 *   **学历 (Education):** 全日制本科 - 成都大学
 *   **职业 (Profession):** 医疗器械产品设计（大博医疗 - 隐形正畸方向）
