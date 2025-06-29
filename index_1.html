@@ -3,245 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>郎庭波 - 个人主页</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>郎庭波 - 个人简介</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-gray: #f8f9fa;
-            --text-color: #333;
-            --white-color: #ffffff;
-            --border-radius: 12px;
-        }
-
-        *, *::before, *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
         
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-            background: #f0f2f5;
-            color: var(--text-color);
-            line-height: 1.7;
-            font-size: 16px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
         }
         
         .container {
-            max-width: 1100px;
-            margin: 30px auto;
-            background: var(--white-color);
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
             overflow: hidden;
+            position: relative;
         }
         
-        /* --- Header --- */
         header {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: var(--white-color);
+            background: linear-gradient(120deg, #2c3e50, #3498db);
+            color: white;
             text-align: center;
-            padding: 80px 30px 100px;
+            padding: 50px 30px 30px;
             position: relative;
+            z-index: 1;
         }
         
         .name {
-            font-size: 3.5rem;
-            font-weight: 700;
-            letter-spacing: 4px;
+            font-size: 3.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
             margin-bottom: 15px;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.25);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .tagline {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 300;
             opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 700px;
+            margin: 0 auto 25px;
         }
         
-        .header-wave {
+        .header-decoration {
             position: absolute;
-            bottom: -1px;
+            bottom: -10px;
             left: 0;
             width: 100%;
-            height: 80px;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3e%3cpath fill='%23ffffff' fill-opacity='1' d='M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,186.7C672,192,768,160,864,144C960,128,1056,128,1152,149.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3e%3c/path%3e%3c/svg%3e");
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120"><path fill="%23ffffff" fill-opacity="1" d="M0,64L80,58.7C160,53,320,43,480,48C640,53,800,75,960,74.7C1120,75,1280,53,1360,42.7L1440,32L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path></svg>');
             background-size: cover;
-            background-repeat: no-repeat;
+            z-index: 2;
         }
         
-        /* --- Content Section --- */
-        .content-section {
-            padding: 60px 50px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .content-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 40px;
-            text-align: center;
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 40px 30px;
+            background: #f8f9fa;
             position: relative;
+            z-index: 1;
+        }
+        
+        /* 优化照片样式 */
+        .photo-item {
+            flex: 1;
+            min-width: 200px;
+            max-width: 280px;
+            height: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            position: relative;
+            transition: all 0.4s ease;
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .photo-item:hover .photo-caption {
+            opacity: 1;
+        }
+        
+        .content-section {
+            padding: 50px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 35px;
             padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 15px;
+            color: #e74c3c;
         }
         
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary-color);
-            border-radius: 2px;
-        }
-        .section-title i {
-            margin-right: 15px;
-            color: var(--accent-color);
-        }
-
-        /* --- At a Glance Section --- */
-        .glance-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-        .glance-card {
-            background: var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            text-align: center;
-            border-bottom: 4px solid var(--primary-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .glance-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(52, 152, 219, 0.2);
-        }
-        .glance-card i {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        .glance-card h3 {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        .glance-card p {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-color);
-        }
-
-        /* --- Timeline Section --- */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 0;
-        }
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 3px;
-            background: #e0e0e0;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1.5px;
-        }
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-        }
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            top: 25px;
-            background: var(--white-color);
-            border: 4px solid var(--primary-color);
-            border-radius: 50%;
-            z-index: 1;
-        }
-        .timeline-item.left {
+            bottom: -2px;
             left: 0;
-            padding-right: 60px;
-        }
-        .timeline-item.right {
-            left: 50%;
-            padding-left: 60px;
-        }
-        .timeline-item.right::after {
-            left: -10px;
-        }
-        .timeline-content {
-            padding: 20px 30px;
-            background: var(--light-gray);
-            border-radius: var(--border-radius);
-            position: relative;
-        }
-        .timeline-content h3 {
-            color: var(--primary-color);
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-        .timeline-date {
-            font-weight: 300;
-            font-size: 0.9rem;
-            color: #777;
-            margin-bottom: 10px;
+            width: 80px;
+            height: 2px;
+            background: #e74c3c;
         }
         
-        /* --- Info Grid --- */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
+            margin-bottom: 50px;
         }
         
         .info-card {
-            background: var(--white-color);
-            border-radius: var(--border-radius);
+            background: #f8f9fa;
+            border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid #3498db;
         }
+        
         .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
         
         .card-title {
             font-size: 1.5rem;
-            color: var(--secondary-color);
+            color: #3498db;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -250,272 +191,283 @@
         .card-title i {
             margin-right: 12px;
             font-size: 1.3rem;
-            color: var(--accent-color);
-            width: 30px;
-            text-align: center;
         }
-        .info-card p { margin-bottom: 10px; }
-        .info-list { list-style: none; }
+        
+        .info-list {
+            list-style: none;
+        }
+        
         .info-list li {
-            padding: 8px 0;
+            padding: 12px 0;
+            border-bottom: 1px dashed #d0d0d0;
+            display: flex;
+        }
+        
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .info-list li strong {
+            min-width: 120px;
+            display: inline-block;
+            color: #2c3e50;
+        }
+        
+        .personal-qualities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .quality {
+            flex: 1;
+            min-width: 220px;
+            background: #e3f2fd;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .quality-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+        
+        .values-section {
+            background: linear-gradient(to right, #f8f9fa, #eef2f7);
+            padding: 50px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .value-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border-top: 3px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
         }
-        .info-list li i {
-            color: var(--primary-color);
+        
+        .value-title i {
+            color: #e74c3c;
             margin-right: 15px;
-            font-size: 1.1rem;
-            width: 20px;
+            font-size: 1.4rem;
         }
         
-        /* --- Photo Gallery --- */
-        .photo-gallery-section {
-            background: linear-gradient(180deg, var(--white-color) 0%, var(--light-gray) 100%);
-        }
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-        }
-        .photo-item {
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            height: 300px;
-        }
-        .photo-item:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .photo-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            color: white;
-            padding: 30px 15px 15px;
-            font-size: 1rem;
-            text-align: center;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-        
-        /* --- Footer --- */
         footer {
             text-align: center;
-            padding: 60px 40px;
-            background: var(--secondary-color);
-            color: rgba(255,255,255,0.8);
-        }
-        .footer-quote {
-            max-width: 700px;
-            margin: 0 auto 20px;
-            font-size: 1.3rem;
-            font-style: italic;
-            font-weight: 300;
-            line-height: 1.8;
-        }
-        .footer-closing {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.6);
+            padding: 40px;
+            background: #2c3e50;
+            color: #ecf0f1;
+            font-size: 1.2rem;
+            position: relative;
         }
         
-        /* --- Responsive Design --- */
+        .footer-quote {
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .pattern {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .pattern-1 {
+            top: 20px;
+            left: 5%;
+            background: radial-gradient(circle, #e74c3c 0%, transparent 70%);
+        }
+        
+        .pattern-2 {
+            bottom: 30px;
+            right: 10%;
+            background: radial-gradient(circle, #3498db 0%, transparent 70%);
+        }
+        
         @media (max-width: 768px) {
-            .name { font-size: 2.8rem; }
-            .tagline { font-size: 1.2rem; }
-            .content-section { padding: 40px 25px; }
-            .timeline::after { left: 10px; }
-            .timeline-item { width: 100%; padding-left: 50px; padding-right: 0; }
-            .timeline-item.right { left: 0; }
-            .timeline-item::after, .timeline-item.right::after { left: 1px; }
-            .info-grid, .glance-grid { grid-template-columns: 1fr; }
+            .name {
+                font-size: 2.4rem;
+            }
+            
+            .content-section, .values-section {
+                padding: 30px 20px;
+            }
+            
+            .photo-item {
+                min-width: 160px;
+                height: 220px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
+        @media (max-width: 480px) {
+            .photo-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .photo-item {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="pattern pattern-1"></div>
+        <div class="pattern pattern-2"></div>
         
         <header>
             <h1 class="name">郎庭波</h1>
-            <p class="tagline">于简约日常，觅内心丰盈；以真诚之姿，待契合之缘。</p>
-            <div class="header-wave"></div>
+            <p class="tagline">热爱生活 · 简单真实 · 追寻内心的充实与平和</p>
+            <div class="header-decoration"></div>
         </header>
         
-        <main>
-            <!-- 速览印象模块 -->
-            <section class="content-section" id="glance">
-                <div class="glance-grid">
-                    <div class="glance-card">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h3>年龄</h3>
-                        <p>33 岁</p>
-                    </div>
-                    <div class="glance-card">
-                        <i class="fas fa-male"></i>
-                        <h3>身高</h3>
-                        <p>165 cm</p>
-                    </div>
-                    <div class="glance-card">
-                        <i class="fas fa-briefcase"></i>
-                        <h3>职业</h3>
-                        <p>医疗器械设计</p>
-                    </div>
-                    <div class="glance-card">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3>坐标</h3>
-                        <p>成都·龙泉驿</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 人生足迹模块 -->
-            <section class="content-section" id="journey">
-                <h2 class="section-title"><i class="fas fa-route"></i> 人生足迹</h2>
-                <div class="timeline">
-                    <div class="timeline-item left">
-                        <div class="timeline-content">
-                            <h3>学历奠基</h3>
-                            <p class="timeline-date">本科 · 成都大学</p>
-                            <p>在这里完成了学业，为未来的职业生涯打下坚实的基础。</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item right">
-                        <div class="timeline-content">
-                            <h3>职业深耕</h3>
-                            <p class="timeline-date">大博医疗 · 产品设计负责人</p>
-                            <p>在医疗器械行业多年，专注于隐形正畸设计，连接市场与生产，见证产品的诞生。</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item left">
-                        <div class="timeline-content">
-                            <h3>生活独立</h3>
-                            <p class="timeline-date">安家成都 · 有房有车</p>
-                            <p>通过努力在成都安顿下来，拥有自己的小窝和代步工具，享受安稳的生活。</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item right">
-                        <div class="timeline-content">
-                            <h3>家庭责任</h3>
-                            <p class="timeline-date">家中长子 · 兄妹独立</p>
-                            <p>作为家中的长子，父母康健有保障，弟弟妹妹均已独立，家庭和睦无负担。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <div class="photo-gallery">
+            <div class="photo-item">
+                <img src="C:\Users\Tingbo\Pictures\Camera Roll\1.jpg" alt="健身照片">
+                <div class="photo-caption">很少拍照</div>
+            </div>
+            <div class="photo-item">
+                <img src="C:\Users\Tingbo\Pictures\Camera Roll\5.jpg" alt="烹饪照片">
+                <div class="photo-caption">流汗快乐</div>
+            </div>
+            <div class="photo-item">
+                <img src="C:\Users\Tingbo\Pictures\Camera Roll\3.jpg" alt="户外照片">
+                <div class="photo-caption">有只布丁</div>
+            </div>
+            <div class="photo-item">
+                <img src="C:\Users\Tingbo\Pictures\Camera Roll\4.jpg" alt="生活照">
+                <div class="photo-caption">健身时刻</div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-user"></i> 关于我</h2>
             
-            <!-- 生活百味模块 -->
-            <section class="content-section photo-gallery-section" id="lifestyle">
-                <h2 class="section-title"><i class="fas fa-camera-retro"></i> 生活百味</h2>
-                <div class="photo-gallery">
-                    <!-- 
-                        重要提示: 
-                        以下图片路径是占位符，因为本地路径无法在网页上显示。
-                        请您将自己的照片上传到网络图床(如 sm.ms, imgtu.com 等)，然后将获得的图片链接替换掉下面的 src="..." 部分。
-                    -->
-                    <div class="photo-item">
-                        <img src="4.jpg" alt="健身照片">
-                        <div class="photo-caption">挥洒汗水的快乐</div>
-                    </div>
-                    <div class="photo-item">
-                        <img src="3.jpg" alt="宠物照片">
-                        <div class="photo-caption">家里有只小布丁</div>
-                    </div>
-                    <div class="photo-item">
-                        <img src="5.jpg" alt="烹饪照片">
-                        <div class="photo-caption">暴汗放空</div>
-                    </div>
-                    <div class="photo-item">
-                        <img src="1.jpg" alt="生活照">
-                        <div class="photo-caption">记录生活的瞬间</div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-id-card"></i> 基本信息</h3>
+                    <ul class="info-list">
+                        <li><strong>年龄：</strong>33岁</li>
+                        <li><strong>身高：</strong>165cm</li>
+                        <li><strong>学历：</strong>全日制本科（成都大学）</li>
+                        <li><strong>所在地：</strong>成都龙泉驿区</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-briefcase"></i> 工作与事业</h3>
+                    <p>在医疗器械行业深耕多年（大博医疗），目前负责产品设计部门的运作，专注于隐形正畸相关设计。</p>
+                    <p>主要职责包括对接医院/诊所的市场订单需求，协助工厂端生产符合标准的医疗产品。工作相对稳定，目前拥有较大的自由度，可居家办公。</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-home"></i> 生活状态</h3>
+                    <p>享受简单而有规律的生活，日常包括烹饪、学习新技能、健身和充足休息。在成都拥有自己的住房和代步车辆。</p>
+                    <div class="personal-qualities">
+                        <div class="quality">
+                            <div class="quality-title">家庭情况</div>
+                            <p>父母在山区老家生活，有完善的保险保障。家中有三兄妹，作为长子，弟弟妹妹已独立发展。</p>
+                        </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- 内心世界模块 -->
-            <section class="content-section" id="inner-world">
-                <h2 class="section-title"><i class="fas fa-heart"></i> 内心世界</h2>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3 class="card-title"><i class="fas fa-fire-alt"></i> 热爱之事</h3>
-                        <p>我的生活由一些简单而纯粹的热爱构成：</p>
-                        <ul class="info-list">
-                            <li><i class="fas fa-dumbbell"></i> 健身，是与身体的对话，更是持之以恒的自律。</li>
-                            <li><i class="fas fa-utensils"></i> 烹饪，是创造美味的艺术，也是疗愈身心的过程。</li>
-                            <li><i class="fas fa-fish"></i> 路亚，是与自然的静谧独处，享受专注与宁静。</li>
-                            <li><i class="fas fa-bicycle"></i> 骑行，是在风中感受自由，用双轮丈量城市。</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h3 class="card-title"><i class="fas fa-hand-holding-heart"></i> 生活信条</h3>
-                        <p>我信奉简单、真实的生活哲学。</p>
-                        <p><strong>消费观：</strong>理性务实，追求“拥有”不如追求“感受”，比起物质堆砌，更看重内心的充实与平和。</p>
-                        <p><strong>个人习惯：</strong>无烟、无酒、不赌博。生活规律，注重健康，相信良好的身心是一切美好的基础。</p>
-                    </div>
-                     <div class="info-card">
-                        <h3 class="card-title"><i class="fas fa-comments"></i> 关于沟通</h3>
-                        <p>性格偏内向，慢热。我享受有来有往、双向奔赴的交流。</p>
-                        <p>也许不擅长单方面地“破冰”或持续输出话题，但我是一个很好的倾听者和回应者。当彼此打开心扉，真诚的交流便会自然而然地发生。</p>
-                    </div>
-                </div>
-            </section>
+            </div>
             
-            <!-- 期待的你 & 我们 -->
-            <section class="content-section" style="background: var(--light-gray);" id="expectations">
-                <h2 class="section-title"><i class="fas fa-hands-helping"></i> 期待的你 & 我们</h2>
-                <div class="info-grid">
-                     <div class="info-card">
-                        <h3 class="card-title"><i class="fas fa-female"></i> 我所期待的你</h3>
-                        <p>希望你是一位活泼开朗、热爱生活的女生。若你也钟爱运动，那便是锦上添花。期待你对生活有热情，对世界有好奇。</p>
-                    </div>
-                    <div class="info-card">
-                        <h3 class="card-title"><i class="fas fa-map-signs"></i> 我们未来的模样</h3>
-                        <p>我向往一种共同成长的伴侣关系。我们可以一起健身，一起研究菜谱，在周末开着车去探索未知的风景，分享旅途中的点滴美好，在平凡的生活中创造属于我们的不凡回忆。</p>
-                    </div>
-                    <div class="info-card">
-                        <h3 class="card-title"><i class="fas fa-info-circle"></i> 一点坦诚</h3>
-                        <p>我的身高是165cm，这是我真实的一部分。如果你对此有所介意，希望我们都能坦诚面对。</p>
-                        <p>思想上偏传统，在关系未明确前，会保持尊重和恰当的距离。我相信，真诚是建立一切信任的基石。</p>
-                    </div>
+            <h2 class="section-title"><i class="fas fa-heart"></i> 生活与兴趣</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-utensils"></i> 日常节奏</h3>
+                    <p>生活规律而充实：工作之余喜欢研究烹饪，会做多种家常菜并持续学习新菜式；观看教程类视频（美食、电脑相关）；保持健身习惯；注重充足睡眠。</p>
                 </div>
-            </section>
-        </main>
+                
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-hiking"></i> 长期爱好</h3>
+                    <ul class="info-list">
+                        <li><i class="fas fa-dumbbell"></i> 健身 - 坚持多年的健康习惯</li>
+                        <li><i class="fas fa-bicycle"></i> 骑自行车 - 享受骑行中的自由感</li>
+                        <li><i class="fas fa-fish"></i> 路亚 - 与自然相处的宁静时光</li>
+                        <li><i class="fas fa-utensil-spoon"></i> 研究美食 - 从烹饪到品尝的完整乐趣</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="card-title"><i class="fas fa-lightbulb"></i> 生活理念</h3>
+                    <p>倾向简单生活，消费观理性务实。注重内心充实而非物质攀比，保持低欲望的生活方式。感情经历简单，无不良嗜好（不烟不酒不赌）。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="values-section">
+            <h2 class="section-title"><i class="fas fa-star"></i> 价值观与期待</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3 class="value-title"><i class="fas fa-heart"></i> 关于关系</h3>
+                    <p>希望建立基于真诚欣赏和自然吸引的关系，而非迫于外界压力。重视情感的真实性，认为成年人应对自己和他人负责。</p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title"><i class="fas fa-comments"></i> 性格特点</h3>
+                    <p>性格偏内向，可以自然交流但需要双向互动。不擅长单方面持续主导话题，更倾向于有来有往的沟通模式。</p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title"><i class="fas fa-shopping-cart"></i> 生活方式</h3>
+                    <p>收入满足日常且有储蓄，消费观念理性。偏好低消费生活，与高消费生活方式可能不太契合。</p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title"><i class="fas fa-car"></i> 未来期待</h3>
+                    <p>希望找到一位活泼开朗、热爱生活的伴侣，有规律运动的习惯。期待能一起自驾探索未知，分享旅途中的美好。</p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title"><i class="fas fa-exclamation-circle"></i> 重要提示</h3>
+                    <p>身高165cm，对此介意的请坦诚告知。思想传统，在关系未明确前会保持恰当距离。期待双方都能真诚相待。</p>
+                </div>
+                
+                <div class="value-card">
+                    <h3 class="value-title"><i class="fas fa-hands-helping"></i> 内心向往</h3>
+                    <p>向往两人共同成长的关系，在简单生活中发现美好。重视健康的生活方式，相信良好的身心状态是一切的基础。</p>
+                </div>
+            </div>
+        </div>
         
         <footer>
-            <p class="footer-quote">"以健康的身心为基石，用真诚的态度去相遇，在简单的生活中，共同成长，分享旅途。"</p>
-            <p class="footer-closing">如果你觉得我们志趣相投，期待你的回音。</p>
-            <p class="footer-closing">电话:18682892907</p>
+            <p class="footer-quote">"以真诚之心，遇契合之人；在平凡生活中，发现不平凡的美好。健康为基，相伴成长，共享人生旅途。"</p>
         </footer>
     </div>
-    <script>
-        // 简单的滚动可视区域动画
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.content-section');
-
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
 </body>
 </html>
