@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郎庭波 - 个人主页</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-gray: #f8f9fa;
+            --text-color: #333;
+            --white-color: #ffffff;
+            --border-radius: 12px;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            background: #f0f2f5;
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            background: var(--white-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        /* --- Header --- */
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: var(--white-color);
+            text-align: center;
+            padding: 80px 30px 100px;
+            position: relative;
+        }
+        
+        .name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.25);
+        }
+        
+        .tagline {
+            font-size: 1.4rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .header-wave {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3e%3cpath fill='%23ffffff' fill-opacity='1' d='M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,186.7C672,192,768,160,864,144C960,128,1056,128,1152,149.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3e%3c/path%3e%3c/svg%3e");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        /* --- Content Section --- */
+        .content-section {
+            padding: 60px 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        .section-title i {
+            margin-right: 15px;
+            color: var(--accent-color);
+        }
+
+        /* --- At a Glance Section --- */
+        .glance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .glance-card {
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 4px solid var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glance-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(52, 152, 219, 0.2);
+        }
+        .glance-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .glance-card h3 {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .glance-card p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        /* --- Timeline Section --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: #e0e0e0;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            top: 25px;
+            background: var(--white-color);
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-item.left {
+            left: 0;
+            padding-right: 60px;
+        }
+        .timeline-item.right {
+            left: 50%;
+            padding-left: 60px;
+        }
+        .timeline-item.right::after {
+            left: -10px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            position: relative;
+        }
+        .timeline-content h3 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .timeline-date {
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        
+        /* --- Info Grid --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .info-card {
+            background: var(--white-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            width: 30px;
+            text-align: center;
+        }
+        .info-card p { margin-bottom: 10px; }
+        .info-list { list-style: none; }
+        .info-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        .info-list li i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 1.1rem;
+            width: 20px;
+        }
+        
+        /* --- Photo Gallery --- */
+        .photo-gallery-section {
+            background: linear-gradient(180deg, var(--white-color) 0%, var(--light-gray) 100%);
+        }
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        .photo-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            height: 300px;
+        }
+        .photo-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 30px 15px 15px;
+            font-size: 1rem;
+            text-align: center;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--secondary-color);
+            color: rgba(255,255,255,0.8);
+        }
+        .footer-quote {
+            max-width: 700px;
+            margin: 0 auto 20px;
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+        .footer-closing {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .name { font-size: 2.8rem; }
+            .tagline { font-size: 1.2rem; }
+            .content-section { padding: 40px 25px; }
+            .timeline::after { left: 10px; }
+            .timeline-item { width: 100%; padding-left: 50px; padding-right: 0; }
+            .timeline-item.right { left: 0; }
+            .timeline-item::after, .timeline-item.right::after { left: 1px; }
+            .info-grid, .glance-grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <h1 class="name">郎庭波</h1>
+            <p class="tagline">于简约日常，觅内心丰盈；以真诚之姿，待契合之缘。</p>
+            <div class="header-wave"></div>
+        </header>
+        
+        <main>
+            <!-- 速览印象模块 -->
+            <section class="content-section" id="glance">
+                <div class="glance-grid">
+                    <div class="glance-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>年龄</h3>
+                        <p>33 岁</p>
+                    </div>
+                    <div class="glance-card">
+                        <i class="fas fa-male"></i>
+                        <h3>身高</h3>
+                        <p>165 cm</p>
+                    </div>
+                    <div class="glance-card">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>职业</h3>
+                        <p>医疗器械设计</p>
+                    </div>
+                    <div class="glance-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>坐标</h3>
+                        <p>成都·龙泉驿</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 人生足迹模块 -->
+            <section class="content-section" id="journey">
+                <h2 class="section-title"><i class="fas fa-route"></i> 人生足迹</h2>
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>学历奠基</h3>
+                            <p class="timeline-date">本科 · 成都大学</p>
+                            <p>在这里完成了学业，为未来的职业生涯打下坚实的基础。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>职业深耕</h3>
+                            <p class="timeline-date">大博医疗 · 产品设计负责人</p>
+                            <p>在医疗器械行业多年，专注于隐形正畸设计，连接市场与生产，见证产品的诞生。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>生活独立</h3>
+                            <p class="timeline-date">安家成都 · 有房有车</p>
+                            <p>通过努力在成都安顿下来，拥有自己的小窝和代步工具，享受安稳的生活。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>家庭责任</h3>
+                            <p class="timeline-date">家中长子 · 兄妹独立</p>
+                            <p>作为家中的长子，父母康健有保障，弟弟妹妹均已独立，家庭和睦无负担。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 生活百味模块 -->
+            <section class="content-section photo-gallery-section" id="lifestyle">
+                <h2 class="section-title"><i class="fas fa-camera-retro"></i> 生活百味</h2>
+                <div class="photo-gallery">
+                    <!-- 
+                        重要提示: 
+                        以下图片路径是占位符，因为本地路径无法在网页上显示。
+                        请您将自己的照片上传到网络图床(如 sm.ms, imgtu.com 等)，然后将获得的图片链接替换掉下面的 src="..." 部分。
+                    -->
+                    <div class="photo-item">
+                        <img src="4.jpg" alt="健身照片">
+                        <div class="photo-caption">挥洒汗水的快乐</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="3.jpg" alt="宠物照片">
+                        <div class="photo-caption">家里有只小布丁</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="5.jpg" alt="烹饪照片">
+                        <div class="photo-caption">暴汗放空</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="1.jpg" alt="生活照">
+                        <div class="photo-caption">记录生活的瞬间</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 内心世界模块 -->
+            <section class="content-section" id="inner-world">
+                <h2 class="section-title"><i class="fas fa-heart"></i> 内心世界</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3 class="card-title"><i class="fas fa-fire-alt"></i> 热爱之事</h3>
+                        <p>我的生活由一些简单而纯粹的热爱构成：</p>
+                        <ul class="info-list">
+                            <li><i class="fas fa-dumbbell"></i> 健身，是与身体的对话，更是持之以恒的自律。</li>
+                            <li><i class="fas fa-utensils"></i> 烹饪，是创造美味的艺术，也是疗愈身心的过程。</li>
+                            <li><i class="fas fa-fish"></i> 路亚，是与自然的静谧独处，享受专注与宁静。</li>
+                            <li><i class="fas fa-bicycle"></i> 骑行，是在风中感受自由，用双轮丈量城市。</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title"><i class="fas fa-hand-holding-heart"></i> 生活信条</h3>
+                        <p>我信奉简单、真实的生活哲学。</p>
+                        <p><strong>消费观：</strong>理性务实，追求“拥有”不如追求“感受”，比起物质堆砌，更看重内心的充实与平和。</p>
+                        <p><strong>个人习惯：</strong>无烟、无酒、不赌博。生活规律，注重健康，相信良好的身心是一切美好的基础。</p>
+                    </div>
+                     <div class="info-card">
+                        <h3 class="card-title"><i class="fas fa-comments"></i> 关于沟通</h3>
+                        <p>性格偏内向，慢热。我享受有来有往、双向奔赴的交流。</p>
+                        <p>也许不擅长单方面地“破冰”或持续输出话题，但我是一个很好的倾听者和回应者。当彼此打开心扉，真诚的交流便会自然而然地发生。</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 期待的你 & 我们 -->
+            <section class="content-section" style="background: var(--light-gray);" id="expectations">
+                <h2 class="section-title"><i class="fas fa-hands-helping"></i> 期待的你 & 我们</h2>
+                <div class="info-grid">
+                     <div class="info-card">
+                        <h3 class="card-title"><i class="fas fa-female"></i> 我所期待的你</h3>
+                        <p>希望你是一位活泼开朗、热爱生活的女生。若你也钟爱运动，那便是锦上添花。期待你对生活有热情，对世界有好奇。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title"><i class="fas fa-map-signs"></i> 我们未来的模样</h3>
+                        <p>我向往一种共同成长的伴侣关系。我们可以一起健身，一起研究菜谱，在周末开着车去探索未知的风景，分享旅途中的点滴美好，在平凡的生活中创造属于我们的不凡回忆。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title"><i class="fas fa-info-circle"></i> 一点坦诚</h3>
+                        <p>我的身高是165cm，这是我真实的一部分。如果你对此有所介意，希望我们都能坦诚面对。</p>
+                        <p>思想上偏传统，在关系未明确前，会保持尊重和恰当的距离。我相信，真诚是建立一切信任的基石。</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p class="footer-quote">"以健康的身心为基石，用真诚的态度去相遇，在简单的生活中，共同成长，分享旅途。"</p>
+            <p class="footer-closing">如果你觉得我们志趣相投，期待你的回音。</p>
+            <p class="footer-closing">电话:18682892907</p>
+        </footer>
+    </div>
+    <script>
+        // 简单的滚动可视区域动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
